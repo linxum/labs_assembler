@@ -3,28 +3,31 @@ title lab2
 org 100h
 
 .data
-a dw -8
-b dw -2
-
+a dw 1
+b dw 0
+d dw 2
+result dw 0   
+   
 .code
-mov ax,a
-mov bx,-15
-imul bx
+mov ax,-53
+mov bx,a
+cwd
+idiv bx
 mov cx,ax
-mov ax,b
+mov ax,d
 add cx,ax
 mov ax,a
 mov bx,4  
-cwd
-idiv bx
+imul bx
 sub cx,ax
 mov ax,a
 mov bx,b
 imul bx
-dec ax
+inc ax
 mov bx,ax
 mov ax,cx
 cwd  
 idiv bx
+mov result,ax
 
 ret
