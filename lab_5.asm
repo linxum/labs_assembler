@@ -41,9 +41,15 @@ loop compare
   mov dx, res_pos
   int 21h
   
+  mov dx, 20h
+  int 21h
+  
   mov ah, 02h 
   add res_neg, 30h
   mov dx, res_neg
+  int 21h
+  
+  mov dx, 20h
   int 21h
   
   mov ah, 02h 
