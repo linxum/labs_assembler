@@ -1,26 +1,32 @@
 org 100h
 
 .data
-arr db 4, 6, 0, 2, 10, 8, -2, -1
-c db -4
-d db 8 
+arr dw 4, 6, 0, 0, 2, 10, 8, -2, -1
+c dw -4
+d dw 8 
 res_pos dw 0
 res_neg dw 0
 res_zero dw 0
 
 .code
 main proc
-mov cx, 8
-mov bh, [c]
-mov dh, [d]
+mov ax, @data
+mov ds, ax
+
+mov cx, 9
+lea si, arr
+
+mov bx, c
+mov dx, d
+
+mov ax, 0
+
 compare:
-mov si, cx 
-sub si,1
-cmp arr[si], bh
+cmp word ptr [si], bx
 jl skip
-cmp arr[si], dh
+cmp word ptr [si], dx
 jg skip
-cmp arr[si], 0
+cmp word ptr [si], 0
 jl nega
 jg pos
 je zero
@@ -35,6 +41,7 @@ zero:
     inc res_zero
     jmp skip
 skip:
+add si, 2
 loop compare 
   mov ah, 02h 
   add res_pos, 30h
